@@ -1,0 +1,42 @@
+[
+  {
+    "title": "TrueNas",
+    "icon": "Assets/truenas.png",
+    "url": "http://127.0.0.1/ui/dashboard"
+  },
+  {
+    "title": "CasaOS",
+    "icon": "Assets/casaos.png",
+    "url": "http://127.0.0.1:7453/#/"
+  },
+  {
+    "title": "nextcloud",
+    "icon": "Assets/nextcloud.png",
+    "url": "http://127.0.0.1:7580/apps/dashboard/"
+  },
+  {
+    "title": "onedev",
+    "icon": "Assets/onedev.png",
+    "url": "http://127.0.0.1:6610/"
+  },
+  {
+    "title": "n8n",
+    "icon": "Assets/n8n.png",
+    "url": "http://127.0.0.1:5678/home/workflows"
+  },
+  {
+    "title": "Nginx",
+    "icon": "Assets/nginx.png",
+    "url": "http://127.0.0.1:8081/"
+  },
+  {
+    "title": "octoprint",
+    "icon": "Assets/octoprint.png",
+    "url": "http://127.0.0.1:5000/"
+  },
+  {
+    "title": "HomeAssistant",
+    "icon": "Assets/homeassistant.png",
+    "url": "http://127.0.0.1:8123/home/overview"
+  }
+]
