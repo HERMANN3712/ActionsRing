@@ -230,10 +230,12 @@ namespace ActionsRing.Views
 
         private void PositionBottomRight()
         {
-            var workingArea = Screen.PrimaryScreen.WorkingArea;
-
-            Left = workingArea.Right - Width - 10;
-            Top = workingArea.Bottom - Height - 10;
+            if(Screen.PrimaryScreen is not null)
+            {
+                var workingArea = Screen.PrimaryScreen.WorkingArea;
+                Left = workingArea.Right - Width - 10;
+                Top = workingArea.Bottom - Height - 10;
+            }
         }
     }
 }
