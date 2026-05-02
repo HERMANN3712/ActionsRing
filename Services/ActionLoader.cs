@@ -6,14 +6,17 @@ namespace ActionsRing.Services
 {
     public static class ActionLoader
     {
-        public static List<RingAction> Load(string path)
+        public static List<RingAction> Load(string basePath, string path)
         {
             try
             {
                 if (!File.Exists(path))
                     return new List<RingAction>();
 
-                string json = File.ReadAllText(path);
+                string jsonPath = Path.Combine(basePath, path);
+                
+
+                string json = File.ReadAllText(jsonPath);
 
                 return JsonSerializer.Deserialize<List<RingAction>>(json,
                     new JsonSerializerOptions
@@ -24,7 +27,7 @@ namespace ActionsRing.Services
             catch
             {
                 return new List<RingAction>();
-            }
+            }           
         }
     }
 }

@@ -1,18 +1,21 @@
-﻿using System.Diagnostics;
+﻿using ActionsRing.Models;
+using ActionsRing.Services;
+using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using ActionsRing.Models;
-using ActionsRing.Services;
+using System.Windows.Shapes;
 using Brushes = System.Windows.Media.Brushes;
 using Button = System.Windows.Controls.Button;
 using Color = System.Windows.Media.Color;
 using Cursors = System.Windows.Input.Cursors;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.MessageBox;
+using Path = System.IO.Path;
 
 namespace ActionsRing.Views
 {
@@ -33,9 +36,9 @@ namespace ActionsRing.Views
                     Hide();
             };
         }
-
+        
         public void ShowRing()
-        {
+        {            
             if (!IsVisible)
                 Show();
 
@@ -55,7 +58,7 @@ namespace ActionsRing.Views
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             _actions.Clear();
-            _actions.AddRange(ActionLoader.Load("actions.json"));
+            _actions.AddRange(ActionLoader.Load(AppContext.BaseDirectory, "actions.json"));
             DrawRing();
         }
 
@@ -122,12 +125,13 @@ namespace ActionsRing.Views
                 Width = size,
                 Height = size
             };
+            string basePath = AppContext.BaseDirectory;            
 
-            if (!string.IsNullOrWhiteSpace(action.Icon) && File.Exists(action.Icon))
+            if (!string.IsNullOrWhiteSpace(action.Icon) && File.Exists(Path.Combine(basePath, action.Icon)))
             {
                 templateBorder.Child = new System.Windows.Controls.Image
                 {
-                    Source = new BitmapImage(new Uri(Path.GetFullPath(action.Icon))),
+                    Source = new BitmapImage(new Uri(Path.GetFullPath(Path.Combine(basePath, action.Icon)))),
                     Stretch = Stretch.UniformToFill
                 };
             }
@@ -214,6 +218,18 @@ namespace ActionsRing.Views
         {
             if (e.Key == Key.Escape)
                 Hide();
+        }
+
+        bool _shown;
+
+        protected override void OnContentRendered(EventArgs e)
+        {
+            base.OnContentRendered(e);            
+
+            if (_shown)
+                return;
+
+            _shown = true;
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)

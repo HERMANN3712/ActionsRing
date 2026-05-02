@@ -17,6 +17,7 @@ Source: "bin\Release\net8.0-windows\win-x64\*"; DestDir: "{app}"; Flags: ignorev
 Source: "bin\Release\net8.0-windows\win-x64\Assets\*"; DestDir: "{app}\Assets"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
+Name: "{userstartup}\Actions Ring"; Filename: "{app}\ActionsRing.exe"
 Name: "{group}\Actions Ring"; Filename: "{app}\ActionsRing.exe"
 Name: "{autodesktop}\Actions Ring"; Filename: "{app}\ActionsRing.exe"; Tasks: desktopicon
 
@@ -26,7 +27,7 @@ Name: "startup"; Description: "Lancer Actions Ring au démarrage de Windows"; Fl
 
 [Registry]
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; \
-    ValueType: string; ValueName: "ActionsRing"; ValueData: """{app}\ActionsRing.exe"""; \
+    ValueType: string; ValueName: "ActionsRing"; ValueData: "cd ""{app}"" && ActionsRing.exe"; \
     Tasks: startup; Flags: uninsdeletevalue
 
 [Run]
