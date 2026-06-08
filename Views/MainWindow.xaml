@@ -11,7 +11,8 @@
         Background="Transparent"
         ShowInTaskbar="False"
         Topmost="True"
-        KeyDown="Window_KeyDown">
+        KeyDown="Window_KeyDown"
+        MouseWheel="Window_MouseWheel">
 
     <Grid Background="Transparent" MouseDown="RootGrid_MouseDown">
         <Canvas x:Name="RingCanvas"/>

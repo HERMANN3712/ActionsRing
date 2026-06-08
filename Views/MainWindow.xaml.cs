@@ -23,6 +23,7 @@ namespace ActionsRing.Views
     {
         private readonly List<RingAction> _actions = new();
         private bool _allowRealClose;
+        private double _rotationOffset = 0;
 
         public MainWindow()
         {
@@ -46,6 +47,7 @@ namespace ActionsRing.Views
 
             Activate();
             Focus();
+            Keyboard.Focus(this);
             DrawRing();
         }
 
@@ -83,7 +85,7 @@ namespace ActionsRing.Views
             for (int i = 0; i < _actions.Count; i++)
             {
                 RingAction action = _actions[i];
-                double angle = (2 * Math.PI * i / _actions.Count) - (Math.PI / 2);
+                double angle = (2 * Math.PI * i / _actions.Count) - (Math.PI / 2) +_rotationOffset;
 
                 double iconX = centerX + radius * Math.Cos(angle) - iconSize / 2;
                 double iconY = centerY + radius * Math.Sin(angle) - iconSize / 2;
@@ -218,6 +220,15 @@ namespace ActionsRing.Views
         {
             if (e.Key == Key.Escape)
                 Hide();
+        }
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            double step = Math.PI / 36; // 5 degrés
+
+            _rotationOffset += e.Delta > 0 ? -step : step;
+
+            DrawRing();
         }
 
         bool _shown;
